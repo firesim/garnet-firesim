@@ -1,3 +1,5 @@
 .Xil
 vivado.jou
 vivado.log
+cl_*
+!cl_firesim/

@@ -20,6 +20,14 @@
 # @BERI_LICENSE_HEADER_END@
 #
 
+set ifrequency  [lindex $argv 0]
+set istrategy   [lindex $argv 1]
+set iboard      [lindex $argv 2]
+
+set desired_host_frequency $ifrequency
+# TODO: this needs to be piped through elsewhere?
+set strategy $istrategy
+
 set project_dir ".."
 set CL_DIR "$project_dir"
 set garnet_dir "$project_dir/.."
@@ -29,9 +37,6 @@ set partition_module "example"
 set disable_ddrb 1
 
 set_param sta.enableAutoGenClkNamePersistence 0
-
-# TODO: FIX
-set desired_host_frequency 10.0
 
 source "$garnet_dir/tcl/build.tcl"
 
