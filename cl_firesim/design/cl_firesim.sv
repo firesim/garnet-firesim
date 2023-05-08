@@ -35,6 +35,8 @@ logic rst_extra1_n_sync;
 // to avoid cases where developer may forget to
 // remove it from the end of the file
 
+assign irq_req = 16'b0;
+
 //-------------------------------------------------
 // Wires
 //-------------------------------------------------
@@ -341,158 +343,19 @@ axi_clock_converter_512_wide wide_pcis_clock_convert (
 // DDR controller instantiation   
 //-----------------------------------------
 
-
-wire [15 : 0] mc_ddr_s_1_axi_awid;
-wire [63 : 0] mc_ddr_s_1_axi_awaddr;
-wire [7 : 0] mc_ddr_s_1_axi_awlen;
-//wire [2 : 0] mc_ddr_s_1_axi_awsize;
-//wire [1 : 0] mc_ddr_s_1_axi_awburst;
-//wire [0 : 0] mc_ddr_s_1_axi_awlock;
-//wire [3 : 0] mc_ddr_s_1_axi_awcache;
-//wire [2 : 0] mc_ddr_s_1_axi_awprot;
-//wire [3 : 0] mc_ddr_s_1_axi_awregion;
-//wire [3 : 0] mc_ddr_s_1_axi_awqos;
-wire mc_ddr_s_1_axi_awvalid;
-wire mc_ddr_s_1_axi_awready;
-
-//wire [15 : 0] mc_ddr_s_1_axi_wid;
-wire [511 : 0] mc_ddr_s_1_axi_wdata;
-wire [63 : 0] mc_ddr_s_1_axi_wstrb;
-wire mc_ddr_s_1_axi_wlast;
-wire mc_ddr_s_1_axi_wvalid;
-wire mc_ddr_s_1_axi_wready;
-
-wire [15 : 0] mc_ddr_s_1_axi_bid;
-wire [1 : 0] mc_ddr_s_1_axi_bresp;
-wire mc_ddr_s_1_axi_bvalid;
-wire mc_ddr_s_1_axi_bready;
-
-wire [15 : 0] mc_ddr_s_1_axi_arid;
-wire [63 : 0] mc_ddr_s_1_axi_araddr;
-wire [7 : 0] mc_ddr_s_1_axi_arlen;
-//wire [2 : 0] mc_ddr_s_1_axi_arsize;
-//wire [1 : 0] mc_ddr_s_1_axi_arburst;
-//wire [0 : 0] mc_ddr_s_1_axi_arlock;
-//wire [3 : 0] mc_ddr_s_1_axi_arcache;
-//wire [2 : 0] mc_ddr_s_1_axi_arprot;
-//wire [3 : 0] mc_ddr_s_1_axi_arregion;
-//wire [3 : 0] mc_ddr_s_1_axi_arqos;
-wire mc_ddr_s_1_axi_arvalid;
-wire mc_ddr_s_1_axi_arready;
-
-wire [15 : 0] mc_ddr_s_1_axi_rid;
-wire [511 : 0] mc_ddr_s_1_axi_rdata;
-wire [1 : 0] mc_ddr_s_1_axi_rresp;
-wire mc_ddr_s_1_axi_rlast;
-wire mc_ddr_s_1_axi_rvalid;
-wire mc_ddr_s_1_axi_rready;
-
-wire [15 : 0] mc_ddr_s_2_axi_awid;
-wire [63 : 0] mc_ddr_s_2_axi_awaddr;
-wire [7 : 0] mc_ddr_s_2_axi_awlen;
-//wire [2 : 0] mc_ddr_s_2_axi_awsize;
-//wire [1 : 0] mc_ddr_s_2_axi_awburst;
-//wire [0 : 0] mc_ddr_s_2_axi_awlock;
-//wire [3 : 0] mc_ddr_s_2_axi_awcache;
-//wire [2 : 0] mc_ddr_s_2_axi_awprot;
-//wire [3 : 0] mc_ddr_s_2_axi_awregion;
-//wire [3 : 0] mc_ddr_s_2_axi_awqos;
-wire mc_ddr_s_2_axi_awvalid;
-wire mc_ddr_s_2_axi_awready;
-
-//wire [15 : 0] mc_ddr_s_2_axi_wid;
-wire [511 : 0] mc_ddr_s_2_axi_wdata;
-wire [63 : 0] mc_ddr_s_2_axi_wstrb;
-wire mc_ddr_s_2_axi_wlast;
-wire mc_ddr_s_2_axi_wvalid;
-wire mc_ddr_s_2_axi_wready;
-
-wire [15 : 0] mc_ddr_s_2_axi_bid;
-wire [1 : 0] mc_ddr_s_2_axi_bresp;
-wire mc_ddr_s_2_axi_bvalid;
-wire mc_ddr_s_2_axi_bready;
-
-wire [15 : 0] mc_ddr_s_2_axi_arid;
-wire [63 : 0] mc_ddr_s_2_axi_araddr;
-wire [7 : 0] mc_ddr_s_2_axi_arlen;
-//wire [2 : 0] mc_ddr_s_2_axi_arsize;
-//wire [1 : 0] mc_ddr_s_2_axi_arburst;
-//wire [0 : 0] mc_ddr_s_2_axi_arlock;
-//wire [3 : 0] mc_ddr_s_2_axi_arcache;
-//wire [2 : 0] mc_ddr_s_2_axi_arprot;
-//wire [3 : 0] mc_ddr_s_2_axi_arregion;
-//wire [3 : 0] mc_ddr_s_2_axi_arqos;
-wire mc_ddr_s_2_axi_arvalid;
-wire mc_ddr_s_2_axi_arready;
-
-wire [15 : 0] mc_ddr_s_2_axi_rid;
-wire [511 : 0] mc_ddr_s_2_axi_rdata;
-wire [1 : 0] mc_ddr_s_2_axi_rresp;
-wire mc_ddr_s_2_axi_rlast;
-wire mc_ddr_s_2_axi_rvalid;
-wire mc_ddr_s_2_axi_rready;
-
-wire [15 : 0] mc_ddr_s_3_axi_awid;
-wire [63 : 0] mc_ddr_s_3_axi_awaddr;
-wire [7 : 0] mc_ddr_s_3_axi_awlen;
-//wire [2 : 0] mc_ddr_s_3_axi_awsize;
-//wire [1 : 0] mc_ddr_s_3_axi_awburst;
-//wire [0 : 0] mc_ddr_s_3_axi_awlock;
-//wire [3 : 0] mc_ddr_s_3_axi_awcache;
-//wire [2 : 0] mc_ddr_s_3_axi_awprot;
-//wire [3 : 0] mc_ddr_s_3_axi_awregion;
-//wire [3 : 0] mc_ddr_s_3_axi_awqos;
-wire mc_ddr_s_3_axi_awvalid;
-wire mc_ddr_s_3_axi_awready;
-
-//wire [15 : 0] mc_ddr_s_3_axi_wid;
-wire [511 : 0] mc_ddr_s_3_axi_wdata;
-wire [63 : 0] mc_ddr_s_3_axi_wstrb;
-wire mc_ddr_s_3_axi_wlast;
-wire mc_ddr_s_3_axi_wvalid;
-wire mc_ddr_s_3_axi_wready;
-
-wire [15 : 0] mc_ddr_s_3_axi_bid;
-wire [1 : 0] mc_ddr_s_3_axi_bresp;
-wire mc_ddr_s_3_axi_bvalid;
-wire mc_ddr_s_3_axi_bready;
-
-wire [15 : 0] mc_ddr_s_3_axi_arid;
-wire [63 : 0] mc_ddr_s_3_axi_araddr;
-wire [7 : 0] mc_ddr_s_3_axi_arlen;
-//wire [2 : 0] mc_ddr_s_3_axi_arsize;
-//wire [1 : 0] mc_ddr_s_3_axi_arburst;
-//wire [0 : 0] mc_ddr_s_3_axi_arlock;
-//wire [3 : 0] mc_ddr_s_3_axi_arcache;
-//wire [2 : 0] mc_ddr_s_3_axi_arprot;
-//wire [3 : 0] mc_ddr_s_3_axi_arregion;
-//wire [3 : 0] mc_ddr_s_3_axi_arqos;
-wire mc_ddr_s_3_axi_arvalid;
-wire mc_ddr_s_3_axi_arready;
-
-wire [15 : 0] mc_ddr_s_3_axi_rid;
-wire [511 : 0] mc_ddr_s_3_axi_rdata;
-wire [1 : 0] mc_ddr_s_3_axi_rresp;
-wire mc_ddr_s_3_axi_rlast;
-wire mc_ddr_s_3_axi_rvalid;
-wire mc_ddr_s_3_axi_rready;
-
 // Defining local parameters that will instantiate the
 // 3 DRAM controllers inside the CL
   
-   localparam DDR_A_PRESENT = `USE_DDR_CHANNEL_A;
-   localparam DDR_B_PRESENT = `USE_DDR_CHANNEL_B;
-   localparam DDR_D_PRESENT = `USE_DDR_CHANNEL_D;
-
+localparam DDR_A_PRESENT = `USE_DDR_CHANNEL_A;
 
 // Define the addition pipeline stag
 // needed to close timing for the various
 // place where ATG (Automatic Test Generator)
 // is defined
    
-   localparam NUM_CFG_STGS_CL_DDR_ATG = 8;
-   localparam NUM_CFG_STGS_SH_DDR_ATG = 4;
-   localparam NUM_CFG_STGS_PCIE_ATG = 4;
+localparam NUM_CFG_STGS_CL_DDR_ATG = 8;
+localparam NUM_CFG_STGS_SH_DDR_ATG = 4;
+localparam NUM_CFG_STGS_PCIE_ATG = 4;
 
 
 // To reduce RTL simulation time, only 8KiB of
@@ -511,98 +374,9 @@ wire mc_ddr_s_3_axi_rready;
    localparam NO_SCRB_INST = 0;
 `endif   
 
-
-logic [2:0] lcl_sh_cl_ddr_is_ready;
-
-logic [7:0] sh_ddr_stat_addr_q[2:0];
-logic[2:0] sh_ddr_stat_wr_q;
-logic[2:0] sh_ddr_stat_rd_q; 
-logic[31:0] sh_ddr_stat_wdata_q[2:0];
-logic[2:0] ddr_sh_stat_ack_q;
-logic[31:0] ddr_sh_stat_rdata_q[2:0];
-logic[7:0] ddr_sh_stat_int_q[2:0];
-
-
-//convert to 2D 
-logic[15:0] cl_sh_ddr_awid_2d[2:0];
-logic[63:0] cl_sh_ddr_awaddr_2d[2:0];
-logic[7:0] cl_sh_ddr_awlen_2d[2:0];
-logic[2:0] cl_sh_ddr_awsize_2d[2:0];
-logic[1:0] cl_sh_ddr_awburst_2d[2:0];
-logic cl_sh_ddr_awvalid_2d [2:0];
-logic[2:0] sh_cl_ddr_awready_2d;
-
-logic[15:0] cl_sh_ddr_wid_2d[2:0];
-logic[511:0] cl_sh_ddr_wdata_2d[2:0];
-logic[63:0] cl_sh_ddr_wstrb_2d[2:0];
-logic[2:0] cl_sh_ddr_wlast_2d;
-logic[2:0] cl_sh_ddr_wvalid_2d;
-logic[2:0] sh_cl_ddr_wready_2d;
-
-logic[15:0] sh_cl_ddr_bid_2d[2:0];
-logic[1:0] sh_cl_ddr_bresp_2d[2:0];
-logic[2:0] sh_cl_ddr_bvalid_2d;
-logic[2:0] cl_sh_ddr_bready_2d;
-
-logic[15:0] cl_sh_ddr_arid_2d[2:0];
-logic[63:0] cl_sh_ddr_araddr_2d[2:0];
-logic[7:0] cl_sh_ddr_arlen_2d[2:0];
-logic[2:0] cl_sh_ddr_arsize_2d[2:0];
-logic[1:0] cl_sh_ddr_arburst_2d[2:0];
-logic[2:0] cl_sh_ddr_arvalid_2d;
-logic[2:0] sh_cl_ddr_arready_2d;
-
-logic[15:0] sh_cl_ddr_rid_2d[2:0];
-logic[511:0] sh_cl_ddr_rdata_2d[2:0];
-logic[1:0] sh_cl_ddr_rresp_2d[2:0];
-logic[2:0] sh_cl_ddr_rlast_2d;
-logic[2:0] sh_cl_ddr_rvalid_2d;
-logic[2:0] cl_sh_ddr_rready_2d;
-
-assign cl_sh_ddr_awid_2d = '{mc_ddr_s_3_axi_awid, mc_ddr_s_2_axi_awid, mc_ddr_s_1_axi_awid};
-assign cl_sh_ddr_awaddr_2d = '{mc_ddr_s_3_axi_awaddr, mc_ddr_s_2_axi_awaddr, mc_ddr_s_1_axi_awaddr};
-assign cl_sh_ddr_awlen_2d = '{mc_ddr_s_3_axi_awlen, mc_ddr_s_2_axi_awlen, mc_ddr_s_1_axi_awlen};
-assign cl_sh_ddr_awsize_2d = '{3'b110, 3'b110, 3'b110};
-assign cl_sh_ddr_awvalid_2d = '{mc_ddr_s_3_axi_awvalid, mc_ddr_s_2_axi_awvalid, mc_ddr_s_1_axi_awvalid};
-assign cl_sh_ddr_awburst_2d = {2'b01, 2'b01, 2'b01};
-assign {mc_ddr_s_3_axi_awready, mc_ddr_s_2_axi_awready, mc_ddr_s_1_axi_awready} = sh_cl_ddr_awready_2d;
-
-assign cl_sh_ddr_wid_2d = '{16'b0, 16'b0, 16'b0};
-assign cl_sh_ddr_wdata_2d = '{mc_ddr_s_3_axi_wdata, mc_ddr_s_2_axi_wdata, mc_ddr_s_1_axi_wdata};
-assign cl_sh_ddr_wstrb_2d = '{mc_ddr_s_3_axi_wstrb, mc_ddr_s_2_axi_wstrb, mc_ddr_s_1_axi_wstrb};
-assign cl_sh_ddr_wlast_2d = {mc_ddr_s_3_axi_wlast, mc_ddr_s_2_axi_wlast, mc_ddr_s_1_axi_wlast};
-assign cl_sh_ddr_wvalid_2d = {mc_ddr_s_3_axi_wvalid, mc_ddr_s_2_axi_wvalid, mc_ddr_s_1_axi_wvalid};
-assign {mc_ddr_s_3_axi_wready, mc_ddr_s_2_axi_wready, mc_ddr_s_1_axi_wready} = sh_cl_ddr_wready_2d;
-
-assign {mc_ddr_s_3_axi_bid, mc_ddr_s_2_axi_bid, mc_ddr_s_1_axi_bid} = {sh_cl_ddr_bid_2d[2], sh_cl_ddr_bid_2d[1], sh_cl_ddr_bid_2d[0]};
-assign {mc_ddr_s_3_axi_bresp, mc_ddr_s_2_axi_bresp, mc_ddr_s_1_axi_bresp} = {sh_cl_ddr_bresp_2d[2], sh_cl_ddr_bresp_2d[1], sh_cl_ddr_bresp_2d[0]};
-assign {mc_ddr_s_3_axi_bvalid, mc_ddr_s_2_axi_bvalid, mc_ddr_s_1_axi_bvalid} = sh_cl_ddr_bvalid_2d;
-assign cl_sh_ddr_bready_2d = {mc_ddr_s_3_axi_bready, mc_ddr_s_2_axi_bready, mc_ddr_s_1_axi_bready};
-
-assign cl_sh_ddr_arid_2d = '{mc_ddr_s_3_axi_arid, mc_ddr_s_2_axi_arid, mc_ddr_s_1_axi_arid};
-assign cl_sh_ddr_araddr_2d = '{mc_ddr_s_3_axi_araddr, mc_ddr_s_2_axi_araddr, mc_ddr_s_1_axi_araddr};
-assign cl_sh_ddr_arlen_2d = '{mc_ddr_s_3_axi_arlen, mc_ddr_s_2_axi_arlen, mc_ddr_s_1_axi_arlen};
-assign cl_sh_ddr_arsize_2d = '{3'b110, 3'b110, 3'b110};
-assign cl_sh_ddr_arvalid_2d = {mc_ddr_s_3_axi_arvalid, mc_ddr_s_2_axi_arvalid, mc_ddr_s_1_axi_arvalid};
-assign cl_sh_ddr_arburst_2d = {2'b01, 2'b01, 2'b01};
-assign {mc_ddr_s_3_axi_arready, mc_ddr_s_2_axi_arready, mc_ddr_s_1_axi_arready} = sh_cl_ddr_arready_2d;
-
-assign {mc_ddr_s_3_axi_rid, mc_ddr_s_2_axi_rid, mc_ddr_s_1_axi_rid} = {sh_cl_ddr_rid_2d[2], sh_cl_ddr_rid_2d[1], sh_cl_ddr_rid_2d[0]};
-assign {mc_ddr_s_3_axi_rresp, mc_ddr_s_2_axi_rresp, mc_ddr_s_1_axi_rresp} = {sh_cl_ddr_rresp_2d[2], sh_cl_ddr_rresp_2d[1], sh_cl_ddr_rresp_2d[0]};
-assign {mc_ddr_s_3_axi_rdata, mc_ddr_s_2_axi_rdata, mc_ddr_s_1_axi_rdata} = {sh_cl_ddr_rdata_2d[2], sh_cl_ddr_rdata_2d[1], sh_cl_ddr_rdata_2d[0]};
-assign {mc_ddr_s_3_axi_rlast, mc_ddr_s_2_axi_rlast, mc_ddr_s_1_axi_rlast} = sh_cl_ddr_rlast_2d;
-assign {mc_ddr_s_3_axi_rvalid, mc_ddr_s_2_axi_rvalid, mc_ddr_s_1_axi_rvalid} = sh_cl_ddr_rvalid_2d;
-assign cl_sh_ddr_rready_2d = {mc_ddr_s_3_axi_rready, mc_ddr_s_2_axi_rready, mc_ddr_s_1_axi_rready};
-
-//--------------------------------------------------
-//==================================================
-//--------------------------------------------------
-
-
 //-------------------------------------------------------------------------------
 //================================================================================
 //------------------------------------------------------------------------------
-
 
 wire [33 : 0] fsimtop_s_0_axi_awaddr_small;
 wire [33 : 0] fsimtop_s_0_axi_araddr_small;
@@ -853,7 +627,7 @@ wire fsimtop_s_1_axi_rready;
    .io_slave_0_r_bits_resp(fsimtop_s_0_axi_rresp),
    .io_slave_0_r_bits_data(fsimtop_s_0_axi_rdata),
    .io_slave_0_r_bits_last(fsimtop_s_0_axi_rlast),
-   .io_slave_0_r_bits_id(fsimtop_s_0_axi_rid) /*,
+   .io_slave_0_r_bits_id(fsimtop_s_0_axi_rid),
 
    .io_slave_1_aw_ready(fsimtop_s_1_axi_awready),
    .io_slave_1_aw_valid(fsimtop_s_1_axi_awvalid),
@@ -895,18 +669,8 @@ wire fsimtop_s_1_axi_rready;
    .io_slave_1_r_bits_resp(fsimtop_s_1_axi_rresp),
    .io_slave_1_r_bits_data(fsimtop_s_1_axi_rdata),
    .io_slave_1_r_bits_last(fsimtop_s_1_axi_rlast),
-   .io_slave_1_r_bits_id(fsimtop_s_1_axi_rid) */
+   .io_slave_1_r_bits_id(fsimtop_s_1_axi_rid)
 );
-
-  // assign cl_sh_ddr_awsize = 3'b110;
-  // assign cl_sh_ddr_arsize = 3'b110;
-  //assert ((cl_sh_ddr_awsize == 3'b110) | (!cl_sh_ddr_awvalid)) else $error("INVALID AWSIZE on DRAM IF");
-  //assert ((cl_sh_ddr_arsize == 3'b110) | (!cl_sh_ddr_arvalid)) else $error("INVALID ARSIZE on DRAM IF");
-
-  // this is fine.
-  assign cl_sh_ddr_wid = 16'b0; // OK. not sure why this signal is exposed
-
-
 
 //****************DDR CHANNEL C****************************
 
@@ -1118,11 +882,11 @@ axi_dwidth_converter_0 dwidth_adapt_64bits_512bits_0 (
   .m_axi_awlen(DDRA_M_AXI_awlen),        // output wire [7 : 0] m_axi_awlen
   .m_axi_awsize(DDRA_M_AXI_awsize),      // output wire [2 : 0] m_axi_awsize
   .m_axi_awburst(DDRA_M_AXI_awburst),    // output wire [1 : 0] m_axi_awburst
-  .m_axi_awlock(),      // output wire [0 : 0] m_axi_awlock
-  .m_axi_awcache(),    // output wire [3 : 0] m_axi_awcache
-  .m_axi_awprot(),      // output wire [2 : 0] m_axi_awprot
-  .m_axi_awregion(),  // output wire [3 : 0] m_axi_awregion
-  .m_axi_awqos(),        // output wire [3 : 0] m_axi_awqos
+  .m_axi_awlock(DDRA_M_AXI_awlock),      // output wire [0 : 0] m_axi_awlock
+  .m_axi_awcache(DDRA_M_AXI_awcache),    // output wire [3 : 0] m_axi_awcache
+  .m_axi_awprot(DDRA_M_AXI_awprot),      // output wire [2 : 0] m_axi_awprot
+  .m_axi_awregion(DDRA_M_AXI_awregion),  // output wire [3 : 0] m_axi_awregion
+  .m_axi_awqos(DDRA_M_AXI_awqos),        // output wire [3 : 0] m_axi_awqos
   .m_axi_awvalid(DDRA_M_AXI_awvalid),    // output wire m_axi_awvalid
   .m_axi_awready(DDRA_M_AXI_awready),    // input wire m_axi_awready
 
@@ -1140,11 +904,11 @@ axi_dwidth_converter_0 dwidth_adapt_64bits_512bits_0 (
   .m_axi_arlen(DDRA_M_AXI_arlen),        // output wire [7 : 0] m_axi_arlen
   .m_axi_arsize(DDRA_M_AXI_arsize),      // output wire [2 : 0] m_axi_arsize
   .m_axi_arburst(DDRA_M_AXI_arburst),    // output wire [1 : 0] m_axi_arburst
-  .m_axi_arlock(),      // output wire [0 : 0] m_axi_arlock
-  .m_axi_arcache(),    // output wire [3 : 0] m_axi_arcache
-  .m_axi_arprot(),      // output wire [2 : 0] m_axi_arprot
-  .m_axi_arregion(),  // output wire [3 : 0] m_axi_arregion
-  .m_axi_arqos(),        // output wire [3 : 0] m_axi_arqos
+  .m_axi_arlock(DDRA_M_AXI_arlock),      // output wire [0 : 0] m_axi_arlock
+  .m_axi_arcache(DDRA_M_AXI_arcache),    // output wire [3 : 0] m_axi_arcache
+  .m_axi_arprot(DDRA_M_AXI_arprot),      // output wire [2 : 0] m_axi_arprot
+  .m_axi_arregion(DDRA_M_AXI_arregion),  // output wire [3 : 0] m_axi_arregion
+  .m_axi_arqos(DDRA_M_AXI_arqos),        // output wire [3 : 0] m_axi_arqos
   .m_axi_arvalid(DDRA_M_AXI_arvalid),    // output wire m_axi_arvalid
   .m_axi_arready(DDRA_M_AXI_arready),    // input wire m_axi_arready
 
@@ -1310,10 +1074,10 @@ generate
          * 3) add asserts on arsize and awsize to confirm that they're always b110
         */
 
-        assign mc_ddr_s_1_axi_awid = 16'b0; // dwidth convert has no awid for some reason...
-        assign mc_ddr_s_1_axi_arid = 16'b0; // dwidth convert has no arid for some reason...
-        // unused: mc_ddr_s_1_axi_bid
-        // unused: mc_ddr_s_1_axi_rid
+        assign DDRB_M_AXI_awid = 16'b0; // dwidth convert has no awid for some reason...
+        assign DDRB_M_AXI_arid = 16'b0; // dwidth convert has no arid for some reason...
+        // unused: DDRB_M_AXI_bid
+        // unused: DDRB_M_AXI_rid
 
         axi_dwidth_converter_0 dwidth_adapt_64bits_512bits_1 (
           .s_axi_aclk(clk),          // input wire s_axi_aclk
@@ -1364,68 +1128,72 @@ generate
           .s_axi_rready(clock_converted_axi_1_rready),      // input wire s_axi_rready
 
 
-          .m_axi_awaddr(mc_ddr_s_1_axi_awaddr),      // output wire [63 : 0] m_axi_awaddr
-          .m_axi_awlen(mc_ddr_s_1_axi_awlen),        // output wire [7 : 0] m_axi_awlen
-          .m_axi_awsize(),      // output wire [2 : 0] m_axi_awsize
-          .m_axi_awburst(),    // output wire [1 : 0] m_axi_awburst
-          .m_axi_awlock(),      // output wire [0 : 0] m_axi_awlock
-          .m_axi_awcache(),    // output wire [3 : 0] m_axi_awcache
-          .m_axi_awprot(),      // output wire [2 : 0] m_axi_awprot
-          .m_axi_awregion(),  // output wire [3 : 0] m_axi_awregion
-          .m_axi_awqos(),        // output wire [3 : 0] m_axi_awqos
-          .m_axi_awvalid(mc_ddr_s_1_axi_awvalid),    // output wire m_axi_awvalid
-          .m_axi_awready(mc_ddr_s_1_axi_awready),    // input wire m_axi_awready
+          .m_axi_awaddr(DDRB_M_AXI_awaddr),      // output wire [63 : 0] m_axi_awaddr
+          .m_axi_awlen(DDRB_M_AXI_awlen),        // output wire [7 : 0] m_axi_awlen
+          .m_axi_awsize(DDRB_M_AXI_awsize),      // output wire [2 : 0] m_axi_awsize
+          .m_axi_awburst(DDRB_M_AXI_awburst),    // output wire [1 : 0] m_axi_awburst
+          .m_axi_awlock(DDRB_M_AXI_awlock),      // output wire [0 : 0] m_axi_awlock
+          .m_axi_awcache(DDRB_M_AXI_awcache),    // output wire [3 : 0] m_axi_awcache
+          .m_axi_awprot(DDRB_M_AXI_awprot),      // output wire [2 : 0] m_axi_awprot
+          .m_axi_awregion(DDRB_M_AXI_awregion),  // output wire [3 : 0] m_axi_awregion
+          .m_axi_awqos(DDRB_M_AXI_awqos),        // output wire [3 : 0] m_axi_awqos
+          .m_axi_awvalid(DDRB_M_AXI_awvalid),    // output wire m_axi_awvalid
+          .m_axi_awready(DDRB_M_AXI_awready),    // input wire m_axi_awready
 
-          .m_axi_wdata(mc_ddr_s_1_axi_wdata),        // output wire [511 : 0] m_axi_wdata
-          .m_axi_wstrb(mc_ddr_s_1_axi_wstrb),        // output wire [63 : 0] m_axi_wstrb
-          .m_axi_wlast(mc_ddr_s_1_axi_wlast),        // output wire m_axi_wlast
-          .m_axi_wvalid(mc_ddr_s_1_axi_wvalid),      // output wire m_axi_wvalid
-          .m_axi_wready(mc_ddr_s_1_axi_wready),      // input wire m_axi_wready
+          .m_axi_wdata(DDRB_M_AXI_wdata),        // output wire [511 : 0] m_axi_wdata
+          .m_axi_wstrb(DDRB_M_AXI_wstrb),        // output wire [63 : 0] m_axi_wstrb
+          .m_axi_wlast(DDRB_M_AXI_wlast),        // output wire m_axi_wlast
+          .m_axi_wvalid(DDRB_M_AXI_wvalid),      // output wire m_axi_wvalid
+          .m_axi_wready(DDRB_M_AXI_wready),      // input wire m_axi_wready
 
-          .m_axi_bresp(mc_ddr_s_1_axi_bresp),        // input wire [1 : 0] m_axi_bresp
-          .m_axi_bvalid(mc_ddr_s_1_axi_bvalid),      // input wire m_axi_bvalid
-          .m_axi_bready(mc_ddr_s_1_axi_bready),      // output wire m_axi_bready
+          .m_axi_bresp(DDRB_M_AXI_bresp),        // input wire [1 : 0] m_axi_bresp
+          .m_axi_bvalid(DDRB_M_AXI_bvalid),      // input wire m_axi_bvalid
+          .m_axi_bready(DDRB_M_AXI_bready),      // output wire m_axi_bready
 
-          .m_axi_araddr(mc_ddr_s_1_axi_araddr),      // output wire [63 : 0] m_axi_araddr
-          .m_axi_arlen(mc_ddr_s_1_axi_arlen),        // output wire [7 : 0] m_axi_arlen
-          .m_axi_arsize(),      // output wire [2 : 0] m_axi_arsize
-          .m_axi_arburst(),    // output wire [1 : 0] m_axi_arburst
-          .m_axi_arlock(),      // output wire [0 : 0] m_axi_arlock
-          .m_axi_arcache(),    // output wire [3 : 0] m_axi_arcache
-          .m_axi_arprot(),      // output wire [2 : 0] m_axi_arprot
-          .m_axi_arregion(),  // output wire [3 : 0] m_axi_arregion
-          .m_axi_arqos(),        // output wire [3 : 0] m_axi_arqos
-          .m_axi_arvalid(mc_ddr_s_1_axi_arvalid),    // output wire m_axi_arvalid
-          .m_axi_arready(mc_ddr_s_1_axi_arready),    // input wire m_axi_arready
+          .m_axi_araddr(DDRB_M_AXI_araddr),      // output wire [63 : 0] m_axi_araddr
+          .m_axi_arlen(DDRB_M_AXI_arlen),        // output wire [7 : 0] m_axi_arlen
+          .m_axi_arsize(DDRB_M_AXI_arsize),      // output wire [2 : 0] m_axi_arsize
+          .m_axi_arburst(DDRB_M_AXI_arburst),    // output wire [1 : 0] m_axi_arburst
+          .m_axi_arlock(DDRB_M_AXI_arlock),      // output wire [0 : 0] m_axi_arlock
+          .m_axi_arcache(DDRB_M_AXI_arcache),    // output wire [3 : 0] m_axi_arcache
+          .m_axi_arprot(DDRB_M_AXI_arprot),      // output wire [2 : 0] m_axi_arprot
+          .m_axi_arregion(DDRB_M_AXI_arregion),  // output wire [3 : 0] m_axi_arregion
+          .m_axi_arqos(DDRB_M_AXI_arqos),        // output wire [3 : 0] m_axi_arqos
+          .m_axi_arvalid(DDRB_M_AXI_arvalid),    // output wire m_axi_arvalid
+          .m_axi_arready(DDRB_M_AXI_arready),    // input wire m_axi_arready
 
-          .m_axi_rdata(mc_ddr_s_1_axi_rdata),        // input wire [511 : 0] m_axi_rdata
-          .m_axi_rresp(mc_ddr_s_1_axi_rresp),        // input wire [1 : 0] m_axi_rresp
-          .m_axi_rlast(mc_ddr_s_1_axi_rlast),        // input wire m_axi_rlast
-          .m_axi_rvalid(mc_ddr_s_1_axi_rvalid),      // input wire m_axi_rvalid
-          .m_axi_rready(mc_ddr_s_1_axi_rready)      // output wire m_axi_rready
+          .m_axi_rdata(DDRB_M_AXI_rdata),        // input wire [511 : 0] m_axi_rdata
+          .m_axi_rresp(DDRB_M_AXI_rresp),        // input wire [1 : 0] m_axi_rresp
+          .m_axi_rlast(DDRB_M_AXI_rlast),        // input wire m_axi_rlast
+          .m_axi_rvalid(DDRB_M_AXI_rvalid),      // input wire m_axi_rvalid
+          .m_axi_rready(DDRB_M_AXI_rready)      // output wire m_axi_rready
         );
     end
     else begin
-        assign mc_ddr_s_1_axi_awaddr = '0;
-        assign mc_ddr_s_1_axi_awlen = '0;
-        assign mc_ddr_s_1_axi_awid = '0;
-        assign mc_ddr_s_1_axi_awvalid = '0;
-        assign mc_ddr_s_1_axi_awready = '0;
+        assign DDRB_M_AXI_awaddr = '0;
+        assign DDRB_M_AXI_awlen = '0;
+        assign DDRB_M_AXI_awsize = '0;
+        assign DDRB_M_AXI_awburst = '0;
+        assign DDRB_M_AXI_awid = '0;
+        assign DDRB_M_AXI_awvalid = '0;
+        assign DDRB_M_AXI_awready = '0;
 
-        assign mc_ddr_s_1_axi_wdata = '0;
-        assign mc_ddr_s_1_axi_wstrb = '0;
-        assign mc_ddr_s_1_axi_wlast = '0;
-        assign mc_ddr_s_1_axi_wvalid = '0;
-        assign mc_ddr_s_1_axi_wready = '0;
+        assign DDRB_M_AXI_wdata = '0;
+        assign DDRB_M_AXI_wstrb = '0;
+        assign DDRB_M_AXI_wlast = '0;
+        assign DDRB_M_AXI_wvalid = '0;
+        assign DDRB_M_AXI_wready = '0;
 
-        assign mc_ddr_s_1_axi_bready = '0;
+        assign DDRB_M_AXI_bready = '0;
 
-        assign mc_ddr_s_1_axi_arid = '0;
-        assign mc_ddr_s_1_axi_araddr = '0;
-        assign mc_ddr_s_1_axi_arlen = '0;
-        assign mc_ddr_s_1_axi_arvalid = '0;
+        assign DDRB_M_AXI_arid = '0;
+        assign DDRB_M_AXI_araddr = '0;
+        assign DDRB_M_AXI_arlen = '0;
+        assign DDRB_M_AXI_arsize = '0;
+        assign DDRB_M_AXI_arburst = '0;
+        assign DDRB_M_AXI_arvalid = '0;
 
-        assign mc_ddr_s_1_axi_rready = '0;
+        assign DDRB_M_AXI_rready = '0;
 
 
         assign fsimtop_s_1_axi_awready = '0;

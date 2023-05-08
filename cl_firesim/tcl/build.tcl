@@ -34,7 +34,6 @@ set garnet_dir "$project_dir/.."
 
 set project_name "example"
 set partition_module "example"
-set disable_ddrb 1
 
 set_param sta.enableAutoGenClkNamePersistence 0
 
