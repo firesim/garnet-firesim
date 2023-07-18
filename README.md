@@ -9,7 +9,7 @@ access to the 2 x 2 GiB of on-board DDR 4 memory.
 This design is heavily inspired by the FPGA Development Kit provided for Amazon
 F1 instances, but simplified and adapted for the VCU118.
 
-Building and modifying the shell requires Vivado 2019.1.
+Building and modifying the shell requires Vivado 2023.1.
 
 ## Basic structure
 
