@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2019.1
+set scripts_vivado_version 2023.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -51,7 +51,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
    create_project project_1 myproj -part xcvu9p-flga2104-2L-e
-   set_property BOARD_PART xilinx.com:vcu118:part0:2.3 [current_project]
+   set_property BOARD_PART xilinx.com:vcu118:part0:2.4 [current_project]
 }
 
 
@@ -131,13 +131,13 @@ set bCheckIPsPassed 1
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
-xilinx.com:ip:axi_firewall:1.0\
+xilinx.com:ip:axi_firewall:1.2\
 xilinx.com:ip:debug_bridge:3.0\
-xilinx.com:ip:util_ds_buf:2.1\
+xilinx.com:ip:util_ds_buf:2.2\
 xilinx.com:ip:util_vector_logic:2.0\
 xilinx.com:ip:xdma:4.1\
 xilinx.com:ip:axi_register_slice:2.1\
-xilinx.com:ip:pr_decoupler:1.0\
+xilinx.com:ip:dfx_decoupler:1.0\
 xilinx.com:ip:proc_sys_reset:5.0\
 "
 
@@ -337,7 +337,7 @@ proc create_hier_cell_shim { parentCell nameHier } {
  ] [get_bd_pins /shim/irq_shim/clk]
 
   # Create instance: pr_decoupler_CTL, and set properties
-  set pr_decoupler_CTL [ create_bd_cell -type ip -vlnv xilinx.com:ip:pr_decoupler:1.0 pr_decoupler_CTL ]
+  set pr_decoupler_CTL [ create_bd_cell -type ip -vlnv xilinx.com:ip:dfx_decoupler:1.0 pr_decoupler_CTL ]
   set_property -dict [ list \
    CONFIG.ALL_PARAMS {INTF {CTL_AXI_LITE {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 MODE slave PROTOCOL axi4lite SIGNALS {ARVALID {PRESENT 1 WIDTH 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID {PRESENT 1 WIDTH 1} AWREADY {PRESENT 1 WIDTH 1} BVALID {PRESENT 1 WIDTH 1} BREADY {PRESENT 1 WIDTH 1} RVALID {PRESENT 1 WIDTH 1} RREADY {PRESENT 1 WIDTH 1} WVALID {PRESENT 1 WIDTH 1} WREADY {PRESENT 1 WIDTH 1} AWADDR {PRESENT 1 WIDTH 32} AWLEN {PRESENT 0 WIDTH 8} AWSIZE {PRESENT 0 WIDTH 3} AWBURST {PRESENT 0 WIDTH 2} AWLOCK {PRESENT 0 WIDTH 1} AWCACHE {PRESENT 0 WIDTH 4} AWPROT {PRESENT 1 WIDTH 3} WDATA {PRESENT 1 WIDTH 32} WSTRB {PRESENT 1 WIDTH 4} WLAST {PRESENT 0 WIDTH 1} BRESP {PRESENT 1 WIDTH 2} ARADDR {PRESENT 1 WIDTH 32} ARLEN {PRESENT 0 WIDTH 8} ARSIZE {PRESENT 0 WIDTH 3} ARBURST {PRESENT 0 WIDTH 2} ARLOCK {PRESENT 0 WIDTH 1} ARCACHE {PRESENT 0 WIDTH 4} ARPROT {PRESENT 1 WIDTH 3} RDATA {PRESENT 1 WIDTH 32} RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 0 WIDTH 1} AWID {PRESENT 0 WIDTH 0} AWREGION {PRESENT 1 WIDTH 4} AWQOS {PRESENT 1 WIDTH 4} AWUSER {PRESENT 0 WIDTH 0} WID {PRESENT 0 WIDTH 0} WUSER {PRESENT 0 WIDTH 0} BID {PRESENT 0 WIDTH 0} BUSER {PRESENT 0 WIDTH 0} ARID {PRESENT 0 WIDTH 0} ARREGION {PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0} RID {PRESENT 0 WIDTH 0} RUSER {PRESENT 0 WIDTH 0}}}} HAS_SIGNAL_STATUS 1 IPI_PROP_COUNT 4} \
    CONFIG.GUI_HAS_SIGNAL_STATUS {1} \
@@ -379,7 +379,7 @@ proc create_hier_cell_shim { parentCell nameHier } {
  ] $pr_decoupler_CTL
 
   # Create instance: pr_decoupler_DMA, and set properties
-  set pr_decoupler_DMA [ create_bd_cell -type ip -vlnv xilinx.com:ip:pr_decoupler:1.0 pr_decoupler_DMA ]
+  set pr_decoupler_DMA [ create_bd_cell -type ip -vlnv xilinx.com:ip:dfx_decoupler:1.0 pr_decoupler_DMA ]
   set_property -dict [ list \
    CONFIG.ALL_PARAMS {INTF {DMA_AXI {ID 0 VLNV xilinx.com:interface:aximm_rtl:1.0 MODE slave SIGNALS {ARVALID {PRESENT 1 WIDTH 1} ARREADY {PRESENT 1 WIDTH 1} AWVALID {PRESENT 1 WIDTH 1} AWREADY {PRESENT 1 WIDTH 1} BVALID {PRESENT 1 WIDTH 1} BREADY {PRESENT 1 WIDTH 1} RVALID {PRESENT 1 WIDTH 1} RREADY {PRESENT 1 WIDTH 1} WVALID {PRESENT 1 WIDTH 1} WREADY {PRESENT 1 WIDTH 1} AWID {PRESENT 1 WIDTH 4} AWADDR {PRESENT 1 WIDTH 64} AWLEN {PRESENT 1 WIDTH 8} AWSIZE {PRESENT 1 WIDTH 3} AWBURST {PRESENT 1 WIDTH 2} AWLOCK {PRESENT 1 WIDTH 1} AWCACHE {PRESENT 1 WIDTH 4} AWPROT {PRESENT 1 WIDTH 3} AWREGION {PRESENT 1 WIDTH 4} AWQOS {PRESENT 1 WIDTH 4} AWUSER {PRESENT 0 WIDTH 0} WID {PRESENT 1 WIDTH 4} WDATA {PRESENT 1 WIDTH 512} WSTRB {PRESENT 1 WIDTH 64} WLAST {PRESENT 1 WIDTH 1} WUSER {PRESENT 0 WIDTH 0} BID {PRESENT 1 WIDTH 4} BRESP {PRESENT 1 WIDTH 2} BUSER {PRESENT 0 WIDTH 0} ARID {PRESENT 1 WIDTH 4} ARADDR {PRESENT 1 WIDTH 64} ARLEN {PRESENT 1 WIDTH 8} ARSIZE {PRESENT 1 WIDTH 3} ARBURST {PRESENT 1 WIDTH 2} ARLOCK {PRESENT 1 WIDTH 1} ARCACHE {PRESENT 1 WIDTH 4} ARPROT {PRESENT 1 WIDTH 3} ARREGION {PRESENT 1 WIDTH 4} ARQOS {PRESENT 1 WIDTH 4} ARUSER {PRESENT 0 WIDTH 0} RID {PRESENT 1 WIDTH 4} RDATA {PRESENT 1 WIDTH 512} RRESP {PRESENT 1 WIDTH 2} RLAST {PRESENT 1 WIDTH 1} RUSER {PRESENT 0 WIDTH 0}}}} HAS_SIGNAL_STATUS 1 IPI_PROP_COUNT 4} \
    CONFIG.GUI_HAS_SIGNAL_STATUS {1} \
@@ -506,10 +506,10 @@ proc create_hier_cell_PCI_DMA { parentCell nameHier } {
   create_bd_pin -dir I -type rst pcie_perstn
 
   # Create instance: axi_firewall_CTL, and set properties
-  set axi_firewall_CTL [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_firewall:1.0 axi_firewall_CTL ]
+  set axi_firewall_CTL [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_firewall:1.2 axi_firewall_CTL ]
 
   # Create instance: axi_firewall_DMA, and set properties
-  set axi_firewall_DMA [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_firewall:1.0 axi_firewall_DMA ]
+  set axi_firewall_DMA [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_firewall:1.2 axi_firewall_DMA ]
 
   # Create instance: axi_firewall_auto_un_CTL, and set properties
   set block_name axi_firewall_auto_unblocker
@@ -568,7 +568,7 @@ proc create_hier_cell_PCI_DMA { parentCell nameHier } {
  ] [get_bd_pins /PCI_DMA/decouple_pipeline/clk]
 
   # Create instance: util_ds_buf_pcie_refclk, and set properties
-  set util_ds_buf_pcie_refclk [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.1 util_ds_buf_pcie_refclk ]
+  set util_ds_buf_pcie_refclk [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_ds_buf:2.2 util_ds_buf_pcie_refclk ]
   set_property -dict [ list \
    CONFIG.C_BUF_TYPE {IBUFDSGTE} \
    CONFIG.DIFF_CLK_IN_BOARD_INTERFACE {pcie_refclk} \
@@ -606,7 +606,7 @@ proc create_hier_cell_PCI_DMA { parentCell nameHier } {
    CONFIG.ext_xvc_vsec_enable {false} \
    CONFIG.gtcom_in_core_usp {2} \
    CONFIG.gtwiz_in_core_usp {1} \
-   CONFIG.mcap_enablement {PR_over_PCIe} \
+   CONFIG.mcap_enablement {DFX_over_PCIe} \
    CONFIG.mcap_fpga_bitstream_version {00000001} \
    CONFIG.mode_selection {Advanced} \
    CONFIG.pcie_blk_locn {X1Y2} \

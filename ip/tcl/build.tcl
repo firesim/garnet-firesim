@@ -30,7 +30,7 @@ if {[llength $argv] != 1} {
 set ip_module_name [lindex $argv 0]
 
 create_project -in_memory -part xcvu9p-flga2104-2L-e
-set_property board_part xilinx.com:vcu118:part0:2.3 [current_project]
+set_property board_part xilinx.com:vcu118:part0:2.4 [current_project]
 
 source "$source_dir/tcl/$ip_module_name.tcl"
 
